@@ -6,27 +6,27 @@ use serde_derive::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Start {
-    is_white: bool,
-    name: String,
-    fen: Option<String>,
-    time: Option<Duration>,
-    inc: Option<Duration>,
+    pub is_white: bool,
+    pub name: String,
+    pub fen: Option<String>,
+    pub time: Option<Duration>,
+    pub inc: Option<Duration>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Move {
     // (0, 0) = a1, (7, 0) = h1
-    from: (u8, u8),
-    to: (u8, u8),
-    promotion: Option<PromotionPiece>,
-    forfeit: bool,
-    ofer_draw: bool,
+    pub from: (u8, u8),
+    pub to: (u8, u8),
+    pub promotion: Option<PromotionPiece>,
+    pub forfeit: bool,
+    pub ofer_draw: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Ack {
-    ok: bool,
-    game_state: GameState,
+    pub ok: bool,
+    pub game_state: GameState,
 
 }
 

@@ -4,7 +4,7 @@ use serde_derive::{Deserialize, Serialize};
 
 // Serializeation and Deserializeation is done via MessagePack
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Start {
     pub is_white: bool,
     pub name: String,
@@ -13,7 +13,7 @@ pub struct Start {
     pub inc: Option<Duration>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Move {
     // (0, 0) = a1, (7, 0) = h1
     pub from: (u8, u8),
@@ -23,14 +23,14 @@ pub struct Move {
     pub ofer_draw: bool,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Ack {
     pub ok: bool,
     pub game_state: GameState,
 
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum PromotionPiece {
     Queen,
     Bishop,
@@ -38,7 +38,7 @@ pub enum PromotionPiece {
     Rook
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum GameState {
     CheckMate,
     Draw,

@@ -20,7 +20,7 @@ pub struct Move {
     pub to: (u8, u8),
     pub promotion: Option<PromotionPiece>,
     pub forfeit: bool,
-    pub ofer_draw: bool,
+    pub offer_draw: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -40,6 +40,7 @@ pub enum PromotionPiece {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum GameState {
+    InProgress,
     CheckMate,
     Draw,
 }

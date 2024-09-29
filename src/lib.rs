@@ -4,15 +4,31 @@ use serde_derive::{Deserialize, Serialize};
 
 // Serializeation and Deserializeation is done via MessagePack
 
+// Is used when ititialising a game
+//
+// The client sends a message contianing name, prefered color, time on clock, and incremint amount
+// (values set to None if clinet does not implement them)
+// fen should always be set to None
+//
+// The server responds with its name and color (the client gets the other color)
+// Sending a fen string indicates a custom starting position (beware that some libraries only use
+// the position part of the string)
+// Time and inc should only have Some values if the client sent a Some value
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Start {
     pub is_white: bool,
-    pub name: String,
+    pub name: Option<String>,
     pub fen: Option<String>,
     pub time: Option<Duration>,
     pub inc: Option<Duration>,
 }
 
+// Used for performing an action during a game
+//
+// from and to are sent as coordinates starting from the bottom left corner
+// promotion is sent in the same package as the pawn moves to the final rank
+// forfeit and offer_draw are set to true when performing that action then from and to values vill
+// be ignored
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Move {
     // (0, 0) = a1, (7, 0) = h1
@@ -23,6 +39,11 @@ pub struct Move {
     pub offer_draw: bool,
 }
 
+// Sent as a response to each move package
+//
+// Standard Ack package is ok: true, end_state: None
+// If your library cannot perform a move that has been requested return a ok: false
+// If the move that was performed caused an ending state return that state
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Ack {
     pub ok: bool,

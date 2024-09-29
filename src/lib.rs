@@ -61,6 +61,7 @@ pub enum PromotionPiece {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum GameState {
+    InProgress,
     CheckMate,
     Draw,
 }
